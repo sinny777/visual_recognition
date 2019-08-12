@@ -1,86 +1,71 @@
 #!/usr/bin/env python
 
-import re
-import nltk
-
-# nltk.download('stopwords')
-# nltk.download('punkt')
-# nltk.download('averaged_perceptron_tagger')
-# nltk.download('maxent_ne_chunker')
-# nltk.download('words')
-
-import pandas as pd
+import Augmentor
 import numpy as np
+import os
+import glob
+import random
+import collections
 
-# from bs4 import BeautifulSoup
-from nltk.corpus import stopwords
-from nltk.stem.lancaster import LancasterStemmer
-stemmer = LancasterStemmer()
+from PIL import Image
 
-import tensorflow as tf
-from tensorflow import keras
+# import keras
+# from keras.models import Sequential
+# from keras.layers import Dense, Dropout, Flatten
+# from keras.layers import Conv2D, MaxPooling2D
+# from keras.datasets import mnist
 
-class NLPUtility(object):
-    """NLPUtility is a utility class for processing raw HTML text into segments for further learning"""
+class ImageUtil(object):
+    def __init__(self, CONFIG):
+        self.CONFIG = CONFIG
+        print(CONFIG)
 
-    @staticmethod
-    def text_to_word_sequence(text):
-        return keras.preprocessing.text.text_to_word_sequence(text, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~', lower=True, split=' ')
+    # @staticmethod
+    def augmentation(self, path_to_data):
+        print("In ImageClassifier, augmentation: {0}".format(path_to_data))
+        folders = []
+        for f in glob.glob(path_to_data):
+            if os.path.isdir(f):
+                folders.append(os.path.abspath(f))
 
-    @staticmethod
-    def tokenize_sentence(sentence):
-        return nltk.word_tokenize(sentence)
+        print("Folders (classes) found: %s " % [os.path.split(x)[1] for x in folders])
 
-    @staticmethod
-    def stem_words_ignore(words, ignore_words):
-        words = [stemmer.stem(w.lower()) for w in words if w not in ignore_words]
-        return words
+        pipelines = {}
+        for folder in folders:
+            print("Folder %s:" % (folder))
+            pipelines[os.path.split(folder)[1]] = (Augmentor.Pipeline(folder))
+            print("\n----------------------------\n")
+        
+        for p in pipelines.values():
+            print("Class %s has %s samples." % (p.augmentor_images[0].class_label, len(p.augmentor_images)))
 
-    @staticmethod
-    def stem_words(words):
-        words = [stemmer.stem(w.lower()) for w in words]
-        return words
+        try:
+            num_of_samples = int(1000)
+            p = Augmentor.Pipeline(path_to_data)
+            # Add some operations to an existing pipeline.
+            # First, we add a horizontal flip operation to the pipeline:
+            p.flip_left_right(probability=0.4)
+            # Now we add a vertical flip operation to the pipeline:
+            p.flip_top_bottom(probability=0.8)
+            # Add a rotate90 operation to the pipeline:
+            p.rotate90(probability=0.1)
+            p.zoom_random(probability=0.5, percentage_area=0.8)
+            # Now we can sample from the pipeline:
+            # p.sample(num_of_samples)
+            p.flip_top_bottom(probability=0.5)
+            p.random_distortion(probability=1, grid_width=4, grid_height=4, magnitude=8)
+            # Now we can sample from the pipeline:
+            # p.sample(num_of_samples)
 
-    @staticmethod
-    def text_to_wordlist( text, remove_stopwords=False, stem=False ):
-        # 1. Remove HTML
-        # beautiful_text = BeautifulSoup(text, "lxml").get_text()
-        #
-        # 2. Remove non-letters
-        beautiful_text = re.sub("[^a-zA-Z]"," ", text)
-        beautiful_text = beautiful_text.lower()
-        words = nltk.word_tokenize(beautiful_text)
+            p2 = Augmentor.Pipeline(path_to_data)
+            p2.rotate90(probability=0.5)
+            p2.rotate270(probability=0.5)
+            p2.flip_left_right(probability=0.8)
+            p2.flip_top_bottom(probability=0.3)
+            p2.crop_random(probability=1, percentage_area=0.5)
+            p2.resize(probability=1.0, width=320, height=320)
+            # p2.sample(num_of_samples)
+            
+        except Exception as e:
+            print("Unable to run augmentation: {0}".format(e))
 
-        # 3. Optionally remove stop words (false by default)
-        if remove_stopwords:
-            stops = set(stopwords.words("english"))
-            words = [w for w in words if not w in stops]
-
-        # 4. Optionally Stem each word
-        if stem:
-            words = [stemmer.stem(word.lower()) for word in words]
-
-        # 5. Return a list of words
-        return(words)
-
-    # Define a function to split a text into parsed sentences
-    @staticmethod
-    def text_to_sentences( text, tokenizer, remove_stopwords=False ):
-        # Function to split a text into parsed sentences. Returns a
-        # list of sentences, where each sentence is a list of words
-        #
-        # 1. Use the NLTK tokenizer to split the paragraph into sentences
-        raw_sentences = tokenizer.tokenize(text.decode('utf8').strip())
-        #
-        # 2. Loop over each sentence
-        sentences = []
-        for raw_sentence in raw_sentences:
-            # If a sentence is empty, skip it
-            if len(raw_sentence) > 0:
-                # Otherwise, call text_to_wordlist to get a list of words
-                sentences.append( NLPUtility.text_to_wordlist( raw_sentence, \
-                  remove_stopwords ))
-        #
-        # Return the list of sentences (each sentence is a list of words,
-        # so this returns a list of lists
-        return sentences

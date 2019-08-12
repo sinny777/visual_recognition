@@ -97,3 +97,4 @@ I'm using IBM Cloud Function to expose my model deployed on IBM cloud and that c
   * [Watson Machine Learning Client](https://wml-api-pyclient.mybluemix.net/) - IBM Watson Machine Learning Client REST API documentation
   * [IBM Cloud Object Storage](https://console.bluemix.net/docs/services/cloud-object-storage/libraries/python.html#using-python) - Python SDK for IBM Cloud Object storage
   * [IBM Cloud Functions](https://console.bluemix.net/openwhisk/) - IBM Cloud Functions (based on Apache OpenWhisk) is a Function-as-a-Service (FaaS) platform which executes functions in response to incoming events and costs nothing when not in use.
+  * [Image Processing with OpenCV](https://www.analyticsvidhya.com/blog/2019/03/)opencv-functions-computer-vision-python/

@@ -5,7 +5,7 @@
 #
 # Image Classification.
 #
-# python3 build_code/execute.py --data_dir data --result_dir results --config_file model_config.json --data_file data.csv
+# python build_code/execute.py --data_dir data --result_dir results --config_file model_config.json --data_file data.csv
 #
 # *************************************** #
 
@@ -28,9 +28,9 @@ import pandas as pd
 import numpy as np
 import random
 
-import tensorflow as tf
+# import tensorflow as tf
 
-# from handlers.scikit_model_handler import ModelHandler
+from utilities.image_util import ImageUtil
 # from handlers.keras_model_handler import ModelHandler
 
 FLAGS = None
@@ -79,13 +79,13 @@ def set_config():
 
 def execute():
     print('IN execute method >>>>>>>>> ')
-    print(tf.__version__)
-    print(FLAGS)
     if FLAGS.framework == "scikit":
-        print("\n\n <<<<<<<< CREATE MODEL FROM SCIKIT LIBRARY >>>>>>>>")
+        print("\n\n <<<<<<<< CREATE MODEL USING SCIKIT LIBRARY >>>>>>>>")
         # model_handler.create_model()
-    elif FLAGS.framework == "keras":
-        print("\n\n <<<<<<<< CREATE MODEL FROM KERAS LIBRARY >>>>>>>>")
+    elif FLAGS.framework == "tensorflow":
+        print("\n\n <<<<<<<< CREATE MODEL USING TENSORFLOW LIBRARY >>>>>>>>")
+        imageUtil = ImageUtil(CONFIG)
+        print(imageUtil.augmentation('./data/samples/test/*'))
         # model_handler.create_model()
     else:
         return None
