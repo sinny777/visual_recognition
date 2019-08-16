@@ -330,8 +330,9 @@ class ImageUtil(object):
         pipelines = {}
         for folder in folders:
             print("Folder %s:" % (folder))
-            pipelines[os.path.split(folder)[1]] = (Augmentor.Pipeline(folder))
-            print("\n----------------------------\n")
+            if os.path.split(folder)[1] == 'pan':
+                pipelines[os.path.split(folder)[1]] = (Augmentor.Pipeline(folder))
+                print("\n----------------------------\n")
         
         for p in pipelines.values():
             try:
