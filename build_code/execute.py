@@ -27,6 +27,7 @@ import json
 import pandas as pd
 import numpy as np
 import random
+import matplotlib.pyplot as plt
 
 # import tensorflow as tf
 
@@ -85,7 +86,14 @@ def execute():
     elif FLAGS.framework == "tensorflow":
         print("\n\n <<<<<<<< CREATE MODEL USING TENSORFLOW LIBRARY >>>>>>>>")
         imageUtil = ImageUtil(CONFIG)
-        print(imageUtil.augmentation('./data/samples/test/*'))
+        images = imageUtil.cropImagesAtPath('./data/samples/test/*')
+        # images = imageUtil.cropImages(images)
+        for img in images:
+          plt.figure()
+          plt.plot(), plt.imshow(img)
+          plt.title('CROP RESULT')
+          plt.xticks([]), plt.yticks([])
+          plt.show()
         # model_handler.create_model()
     else:
         return None
