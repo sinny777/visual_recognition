@@ -141,7 +141,7 @@ class ImageUtil(object):
         # blurred = cv2.bilateralFilter(gray, 11, 17, 17)
         blurred = cv2.GaussianBlur(gray, (5, 5), 0)
         # blurred = cv2.GaussianBlur(gray, (1,1), 1)
-        # edged = cv2.Canny(img_preprocessed, 10, 250)        
+        # edged = cv2.Canny(gray, 100, 170, apertureSize=3)        
         # median = cv2.medianBlur(img,5)
         # blurred = cv2.bilateralFilter(gray,9,75,75)
         # wide = cv2.Canny(blurred, 10, 50)

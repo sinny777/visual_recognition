@@ -98,3 +98,6 @@ I'm using IBM Cloud Function to expose my model deployed on IBM cloud and that c
   * [IBM Cloud Object Storage](https://console.bluemix.net/docs/services/cloud-object-storage/libraries/python.html#using-python) - Python SDK for IBM Cloud Object storage
   * [IBM Cloud Functions](https://console.bluemix.net/openwhisk/) - IBM Cloud Functions (based on Apache OpenWhisk) is a Function-as-a-Service (FaaS) platform which executes functions in response to incoming events and costs nothing when not in use.
   * [Image Processing with OpenCV](https://www.analyticsvidhya.com/blog/2019/03/)opencv-functions-computer-vision-python/
+  * [OCR Pipeline](https://blog.signzy.com/how-we-built-a-modern-state-of-the-art-ocr-pipeline-preciousdory-dc3a4ae0e87)
+  * [OCR Blog](https://blog.signzy.com/how-we-replaced-humans-in-identity-card-classification-with-our-deep-learning-ai-ae8c6564e338)
+  * [Image Classification](https://github.com/IBM/image-classification-using-cnn-and-keras/blob/master/notebooks/Image%20Classification%20of%20Documents.ipynb)

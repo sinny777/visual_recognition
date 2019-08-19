@@ -6,7 +6,7 @@
 # Image Classification.
 #
 # python build_code/execute.py --data_dir data --result_dir results --config_file model_config.json --data_file data.csv
-#
+# 
 # *************************************** #
 
 """A very simple Image classifier.
@@ -24,6 +24,7 @@ from os import environ
 import tarfile
 import json
 
+import cv2
 import pandas as pd
 import numpy as np
 import random
@@ -31,7 +32,7 @@ import matplotlib.pyplot as plt
 
 # import tensorflow as tf
 
-from utilities.image_util import ImageUtil
+from utilities.crop_util import CropUtil
 # from handlers.keras_model_handler import ModelHandler
 
 FLAGS = None
@@ -82,15 +83,24 @@ def execute():
     print('IN execute method >>>>>>>>> ')
     if FLAGS.framework == "scikit":
         print("\n\n <<<<<<<< CREATE MODEL USING SCIKIT LIBRARY >>>>>>>>")
-        # model_handler.create_model()
+        # model_handler.create_model()        
     elif FLAGS.framework == "tensorflow":
         print("\n\n <<<<<<<< CREATE MODEL USING TENSORFLOW LIBRARY >>>>>>>>")
-        imageUtil = ImageUtil(CONFIG)
-        images = imageUtil.cropImagesAtPath('./data/samples/test/*')
-        # images = imageUtil.cropImages(images)
-        for img in images:
+        # cropUtil = CropUtil(CONFIG)
+        cropUtil = CropUtil()
+        images = cropUtil.cropImagesAtPath('./data/samples/test/pan/*')
+        # images = cropUtil.cropImages(images)
+        for image in images:
+          # gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+          # image=cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
+          # gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+          # (thresh, image) = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+          # (thresh, image) = cv2.threshold(gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+          # cv2.imshow('B&W Image',image)
+          # cv2.waitKey(0)
+          # cv2.destroyAllWindows()
           plt.figure()
-          plt.plot(), plt.imshow(img)
+          plt.plot(), plt.imshow(image)
           plt.title('CROP RESULT')
           plt.xticks([]), plt.yticks([])
           plt.show()
