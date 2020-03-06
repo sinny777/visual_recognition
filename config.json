@@ -1,0 +1,20 @@
+{
+  "watson_os_credentials" : {
+                              "instance_id": "11c63b00-4673-43d1-a64d-cf62a87552b9",
+                              "apikey": "_93dQiuKGt-xZF_SMTeBJ8W_viO0zr3VMzrx12qCQvxZ",
+                              "url": "https://api.aiopenscale.cloud.ibm.com"
+  },
+  "wml_credentials": {
+                        "apikey": "POy5_Ch_FpR2Uu8pqvyd7KCyU3Mwq4dDpyq8kIX9Xvm_",
+                        "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:pm-20:us-south:a/2c303e22de2b34062121bab41b176b1b:e7e44faf-ff8d-4183-9f37-434e2dcd6852::",
+                        "iam_apikey_name": "auto-generated-apikey-1867df0e-7a67-4295-88c7-7ff8bbecfe44",
+                        "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                        "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/2c303e22de2b34062121bab41b176b1b::serviceid:ServiceId-8b63aecb-db16-4654-92ac-8c286f2b492a",
+                        "instance_id": "e7e44faf-ff8d-4183-9f37-434e2dcd6852",
+                        "password": "33a3811b-e9a0-40cc-a4fa-605f7bc26b93",
+                        "url": "https://us-south.ml.cloud.ibm.com",
+                        "username": "1867df0e-7a67-4295-88c7-7ff8bbecfe44"
+ }
+
+
+}
