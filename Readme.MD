@@ -101,3 +101,5 @@ I'm using IBM Cloud Function to expose my model deployed on IBM cloud and that c
   * [OCR Pipeline](https://blog.signzy.com/how-we-built-a-modern-state-of-the-art-ocr-pipeline-preciousdory-dc3a4ae0e87)
   * [OCR Blog](https://blog.signzy.com/how-we-replaced-humans-in-identity-card-classification-with-our-deep-learning-ai-ae8c6564e338)
   * [Image Classification](https://github.com/IBM/image-classification-using-cnn-and-keras/blob/master/notebooks/Image%20Classification%20of%20Documents.ipynb)
+  * [OpenCV Contours](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_contours/py_contour_features/py_contour_features.html)
+  * [Image Processing](https://datacarpentry.org/image-processing/09-contours/)
