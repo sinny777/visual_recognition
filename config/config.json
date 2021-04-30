@@ -1,0 +1,20 @@
+{
+  "train_dataset": "/train",
+  "val_dataset": "/validate",
+  "test_dataset": "/test",
+  "model_name": "CCTV_Detection",
+  "model_weights": "CCTV_Detection_weights.hdf5",
+  "log_dir": "tensorboard_logs",
+  "checkpoints_dir": "training1",
+  "epochs": 30,
+  "batch_size": 77,
+  "IMG_HEIGHT": 224,
+  "IMG_WIDTH": 224,
+  "augmentaion": true,
+  "dropouts": true,
+  "activation": "softmax",
+  "loss": "binary_crossentropy",
+  "optimizer": "adam",
+  "metrics": ["accuracy"],
+  "patience": 10
+}

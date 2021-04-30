@@ -23,8 +23,7 @@ import json
 import urllib3, requests, json, base64, time, os, wget
 from watson_machine_learning_client import WatsonMachineLearningAPIClient
 
-# from build_code.handlers.scikit_model_handler import ModelHandler
-# from build_code.handlers.keras_model_handler import ModelHandler
+from build_code.handlers.model_handler import ModelHandler    
 from build_code.handlers.data_handler import DataHandler
 
 FLAGS = None
@@ -71,26 +70,6 @@ def set_config():
                 "MODEL_CONFIG": MODEL_CONFIG
              }
 
-def get_keras_model():
-    print("\n\n <<<<<<<< GET KERAS MODEL HANDLER >>>>>>>>")
-    from build_code.handlers.keras_model_handler import ModelHandler
-    model_handler = ModelHandler(CONFIG)
-    return model_handler
-
-def get_scikit_model():
-    print("\n\n <<<<<<<< GET SCIKIT MODEL HANDLER >>>>>>>>")
-    from build_code.handlers.scikit_model_handler import ModelHandler
-    model_handler = ModelHandler(CONFIG)
-    return model_handler
-
-def get_model_handler():
-    if FLAGS.framework == "scikit":
-        return get_scikit_model()
-    elif FLAGS.framework == "keras":
-        return get_keras_model()
-    else:
-        return None
-
 def get_scoring_url():
     # deployment_details = client.deployments.get_details(SECRET_CONFIG["deployment_id"]);
     # scoring_url = client.deployments.get_scoring_url(deployment_details)
@@ -118,6 +97,7 @@ def convert_to_predict(text):
 
 def get_results(sentence):
     ERROR_THRESHOLD = 0.15
+
     if FLAGS.from_cloud:
         toPredict = convert_to_predict(sentence)
         # if (to_predict_arr.ndim == 1):
@@ -150,7 +130,7 @@ def init_content():
     try:
       model_handler
     except NameError:
-      model_handler = get_model_handler()
+      model_handler = ModelHandler(CONFIG)
     if FLAGS.from_cloud:
         wml_credentials=SECRET_CONFIG["wml_credentials"]
         global client
@@ -182,8 +162,8 @@ if __name__ == '__main__':
   parser.add_argument('--framework', type=str, default='keras', help='ML Framework to use')
   parser.add_argument('--data_file', type=str, default='data.csv', help='File name for Intents and Classes')
   parser.add_argument('--config_file', type=str, default='model_config.json', help='Model Configuration file name')
-  parser.add_argument('--from_cloud', type=lambda s: s.lower() in ['true', 't', 'yes', '1'], default=True, help='Predict value from model deployed on cloud')
+  parser.add_argument('--from_cloud', type=lambda s: s.lower() in ['true', 't', 'yes', '1'], default=False, help='Predict value from model deployed on cloud')
 
   FLAGS, unparsed = parser.parse_known_args()
-  print("Start model training")
+  print("\n\nStart Inference... \n")
   tf.app.run(main=classify, argv=[sys.argv[0]] + unparsed)
