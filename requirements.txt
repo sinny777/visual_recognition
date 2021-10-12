@@ -20,7 +20,7 @@ tensorflow==1.14.0
 # tensorflow-gpu==1.4.0
 keras-applications==1.0.8
 keras-preprocessing==1.1.0
-opencv-python==3.4.0.12
+opencv-python==3.4.7.28
 termcolor==1.1.0
 werkzeug==0.15.5
 wrapt==1.11.2
