@@ -22,3 +22,8 @@ checkpoints_*/
 *.ckpt
 *.DS_Store
 *.h5
+*.tflite
+*.zip
+*.pickle
+venv
+

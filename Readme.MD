@@ -4,6 +4,29 @@
 
 This repository can be used as a reference to creating ML or Deep learning models using Tensorflow, Keras or any library of your choice.  This one has code for creating Image classifier model that runs on IBM Watson Machine learning platform and can be configured to use runtime (CPU or GPU) as per your choice.  All the code to create and train the model is under the "build_code" folder.  Please note that whole of this code under "build_code" folder is zipped and deployed to IBM Watson Machine Learning platform and runs there.  
 
+## RUN LOCALLY
+
+  - Create virtual environment and activate it
+
+```
+
+virtualenv venv -p python3.8
+source venv/bin/activate
+
+#pip freeze > requirements.txt
+pip install -r requirements.txt
+
+```
+
+### DEACTIVATE AND DELETE VIRTUAL ENV
+
+```
+
+deactivate
+rmvirtualenv venv
+
+```
+
 ## Project Structure
 
   - build_code/execute.py: This is the main file that runs the code to create and train a model.
@@ -101,3 +124,4 @@ I'm using IBM Cloud Function to expose my model deployed on IBM cloud and that c
   * [OCR Pipeline](https://blog.signzy.com/how-we-built-a-modern-state-of-the-art-ocr-pipeline-preciousdory-dc3a4ae0e87)
   * [OCR Blog](https://blog.signzy.com/how-we-replaced-humans-in-identity-card-classification-with-our-deep-learning-ai-ae8c6564e338)
   * [Image Classification](https://github.com/IBM/image-classification-using-cnn-and-keras/blob/master/notebooks/Image%20Classification%20of%20Documents.ipynb)
+  * [IBM Research EDGE AI SDK](https://github.ibm.com/Distributed-AI/edge-ai-sdk)
